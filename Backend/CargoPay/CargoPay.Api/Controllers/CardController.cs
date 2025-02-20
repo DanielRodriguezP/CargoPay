@@ -1,5 +1,7 @@
 ﻿using CargoPay.Application.Services.Interfaces;
 using CargoPay.Data.DTOs;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -10,6 +12,7 @@ namespace CargoPay.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class CardController : ControllerBase
     {
         private readonly ICardService _cardService;

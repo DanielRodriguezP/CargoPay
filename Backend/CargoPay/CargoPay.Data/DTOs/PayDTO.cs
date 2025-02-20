@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CargoPay.Data.Enum
+namespace CargoPay.Data.DTOs
 {
-    public enum CardType
+    public class PayDTO
     {
-        Credito,
-        Debito,
-        Visa
+
     }
 }

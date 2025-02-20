@@ -15,6 +15,7 @@ namespace CargoPay.Data.DTOs
         public int CVV { get; set; }
         public decimal Balance { get; set; }
         public CardType CardType { get; set; }
-        public Guid? CustomerId { get; set; }
+        public string? UserId { get; set; }
+        //public ICollection<Pay>? PayId { get; set; }
     }
 }

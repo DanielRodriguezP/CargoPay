@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace CargoPay.Data.Enum
 {
-    public enum CardType
+    public enum UserType
     {
-        Credito,
-        Debito,
-        Visa
+        Admin,
+        User
     }
 }

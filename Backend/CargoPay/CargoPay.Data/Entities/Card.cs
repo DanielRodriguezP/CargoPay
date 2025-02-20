@@ -10,14 +10,14 @@ namespace CargoPay.Data.Entities
 {
     public class Card
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
         public string? Number { get; set; }
         public int CVV { get; set; }
         public decimal Balance { get; set; }
         public CardType CardType { get; set; }
 
-        [ForeignKey("Customer")]
-        public Guid? CustomerId { get; set; }
-        public virtual Customer? Customer { get; set; }
+        [ForeignKey("User")]
+        public string? UserId { get; set; }
+        public virtual User? User { get; set; }
     }
 }

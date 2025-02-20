@@ -26,12 +26,12 @@ namespace CargoPay.Infrastructure.Repository.Implementations
         {
             var card = new Card
             {
-                Id = Guid.NewGuid(),
+                Id = Guid.NewGuid().ToString(),
                 Balance = cardDTO.Balance,
                 Number = cardDTO.Number,
                 CVV = cardDTO.CVV,
                 CardType = cardDTO.CardType,
-                CustomerId = cardDTO.CustomerId,
+                UserId = cardDTO.UserId.ToString(),
             };
 
             _context.Add(card);
@@ -57,7 +57,7 @@ namespace CargoPay.Infrastructure.Repository.Implementations
      
         public async Task<ActionResponse<Card>> GetAsync(Guid id)
         {
-            var data = await _context.Cards.FirstOrDefaultAsync(c => c.Id == id);
+            var data = await _context.Cards.FirstOrDefaultAsync(c => c.Id == id.ToString());
 
             if (data == null)
             {
