@@ -25,7 +25,7 @@ namespace CargoPay.Infrastructure.Data
         {
             await _context.Database.EnsureCreatedAsync();
             await CheckRolesAsync();
-            await CheckUserAsync("Daniel", "Rodriguez", "daniel.rodriguez@gmail.com", "322 311 4620", UserType.Admin);
+            await CheckUserAsync("Daniel", "Rodriguez", "daniel.rodriguez@gmail.com", "322 311 4620", UserType.Admin, "Calle 40 #50-34");
 
         }
         private async Task CheckRolesAsync()
@@ -34,7 +34,7 @@ namespace CargoPay.Infrastructure.Data
             await _usersService.CheckRoleAsync(UserType.User.ToString());
         }
 
-        private async Task<User> CheckUserAsync(string firstName, string lastName, string email, string phone, UserType userType)
+        private async Task<User> CheckUserAsync(string firstName, string lastName, string email, string phone, UserType userType, string address)
         {
             var user = await _usersService.GetUserAsync(email);
             if (user == null)
@@ -47,6 +47,7 @@ namespace CargoPay.Infrastructure.Data
                     UserName = email,
                     PhoneNumber = phone,
                     UserType = userType,
+                    Address = address
                 };
 
                 await _usersService.AddUserAsync(user, "123456");

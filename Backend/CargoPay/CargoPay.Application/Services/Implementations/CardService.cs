@@ -20,6 +20,6 @@ namespace CargoPay.Application.Services.Implementations
             _cardRepository = cardRepository;
         }
         public async Task<ActionResponse<Card>> AddCardAsync(CardDTO cardDTO) => await _cardRepository.AddCardAsync(cardDTO);
-        public async Task<ActionResponse<Card>> GetAsync(Guid id) => await _cardRepository.GetAsync(id);
+        public async Task<ActionResponse<IEnumerable<Card>>> GetAsync(Guid userId) => await _cardRepository.GetAsync(userId);
     }
 }

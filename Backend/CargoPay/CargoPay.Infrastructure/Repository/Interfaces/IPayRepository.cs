@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CargoPay.Infrastructure.Repository.Interfaces
 {
-    public interface ICardRepository
+    public interface IPayRepository
     {
-        Task<ActionResponse<IEnumerable<Card>>> GetAsync(Guid userId);
-        Task<ActionResponse<Card>> AddCardAsync(CardDTO cardDTO);
+        Task<ActionResponse<IEnumerable<Pay>>> GetAsync(Guid userId);
+        Task<ActionResponse<Pay>> AddPaydAsync(PayDTO payDTO);
     }
 }

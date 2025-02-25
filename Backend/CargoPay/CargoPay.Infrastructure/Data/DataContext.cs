@@ -18,11 +18,7 @@ namespace CargoPay.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Card>().HasIndex(c => c.Number).IsUnique();
-            //modelBuilder.Entity<Pay>()
-            //    .HasOne(p => p.Card)
-            //    .WithMany(c => c.Pays)
-            //    .HasForeignKey(p => p.CardId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity<User>().HasIndex(c => c.Email).IsUnique();
             DisableCascadingDelete(modelBuilder);
         }
         private void DisableCascadingDelete(ModelBuilder modelBuilder)

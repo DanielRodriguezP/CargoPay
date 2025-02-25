@@ -36,8 +36,13 @@ namespace CargoPay.Infrastructure.Migrations
                     b.Property<int>("CardType")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("ExpiryDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("Number")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasMaxLength(15)
+                        .HasColumnType("nvarchar(15)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -45,8 +50,7 @@ namespace CargoPay.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Number")
-                        .IsUnique()
-                        .HasFilter("[Number] IS NOT NULL");
+                        .IsUnique();
 
                     b.HasIndex("UserId");
 
@@ -155,6 +159,10 @@ namespace CargoPay.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email")
+                        .IsUnique()
+                        .HasFilter("[Email] IS NOT NULL");
 
                     b.HasIndex("NormalizedEmail")
                         .HasDatabaseName("EmailIndex");

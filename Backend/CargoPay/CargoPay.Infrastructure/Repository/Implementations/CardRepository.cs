@@ -31,7 +31,8 @@ namespace CargoPay.Infrastructure.Repository.Implementations
                 Number = cardDTO.Number,
                 CVV = cardDTO.CVV,
                 CardType = cardDTO.CardType,
-                UserId = cardDTO.UserId.ToString(),
+                ExpiryDate = cardDTO.ExpiryDate,
+                UserId = cardDTO?.UserId?.ToString(),
             };
 
             _context.Add(card);
@@ -39,6 +40,7 @@ namespace CargoPay.Infrastructure.Repository.Implementations
             try
             {
                 await _context.SaveChangesAsync();
+
                 return new ActionResponse<Card>
                 {
                     Success = true,
@@ -54,21 +56,12 @@ namespace CargoPay.Infrastructure.Repository.Implementations
                 };
             }
         }
-     
-        public async Task<ActionResponse<Card>> GetAsync(Guid id)
+        public async Task<ActionResponse<IEnumerable<Card>>> GetAsync(Guid userId)
         {
-            var data = await _context.Cards.FirstOrDefaultAsync(c => c.Id == id.ToString());
+            var data = await _context.Cards.Where(c => c.UserId == userId.ToString()).ToListAsync();
+            data.Select(c => c.ExpiryDate.ToString("MM/YY"));
 
-            if (data == null)
-            {
-                return new ActionResponse<Card>
-                {
-                    Success = false,
-                    Message = "Error, no existe la tarjeta"
-                };
-            }
-
-            return new ActionResponse<Card>
+            return new ActionResponse<IEnumerable<Card>>
             {
                 Success = true,
                 Result = data

@@ -11,10 +11,11 @@ namespace CargoPay.Data.DTOs
 {
     public class CardDTO
     {
-        public string? Number { get; set; }
+        public string Number { get; set; }
         public int CVV { get; set; }
         public decimal Balance { get; set; }
         public CardType CardType { get; set; }
+        public DateTime ExpiryDate { get; set; }
         public string? UserId { get; set; }
         //public ICollection<Pay>? PayId { get; set; }
     }

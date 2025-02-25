@@ -31,45 +31,15 @@ namespace CargoPay.Api.Controllers
             return BadRequest(result.Message);
         }
 
-        [HttpGet("{id}")]
-        public async Task<IActionResult> GetCardAsync(Guid id)
+        [HttpGet("{userId}")]
+        public async Task<IActionResult> GetCardAsync(Guid userId)
         {
-            var response = await _cardService.GetAsync(id);
+            var response = await _cardService.GetAsync(userId);
             if (response.Success)
             {
                 return Ok(response.Result);
             }
             return NotFound(response.Message);
         }
-
-        //private TokenDTO BuildToken(User user)
-        //{
-            //var claims = new List<Claim>
-            //{
-            //    new(ClaimTypes.Name, user.Email!),
-            //    new(ClaimTypes.Role, user.UserType.ToString()),
-            //    new("FirstName", user.FirstName),
-            //    new("LastName", user.LastName),
-            //    new("Photo", user.Photo ?? string.Empty),
-            //    new("CountryId", user.Country.Id.ToString())
-            //};
-
-            //var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["jwtKey"]!));
-            //var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            //var expiration = DateTime.UtcNow.AddDays(30);
-            //var token = new JwtSecurityToken(
-            //    issuer: null,
-            //    audience: null,
-            //    claims: claims,
-            //    expires: expiration,
-            //    signingCredentials: credentials);
-
-            //return new TokenDTO
-            //{
-            //    Token = new JwtSecurityTokenHandler().WriteToken(token),
-            //    Expiration = expiration
-            //};
-        //}
-
     }
 }

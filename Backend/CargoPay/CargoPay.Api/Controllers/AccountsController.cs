@@ -1,10 +1,12 @@
 ﻿using CargoPay.Application.Services.Interfaces;
 using CargoPay.Data.DTOs;
 using CargoPay.Data.Entities;
+using CargoPay.Data.Enum;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using System.ComponentModel.DataAnnotations;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
@@ -37,6 +39,22 @@ namespace CargoPay.Api.Controllers
 
             return BadRequest(result.Errors.FirstOrDefault());
         }
+        [HttpGet("{email}")]
+        public async Task<IActionResult> GetUserAsync([FromRoute] string email)
+        {
+            var response = await _usersService.GetUserAsync(email);
+            if (response != null)
+                return Ok( new ProfileDTO
+                {
+                    Id = response.Id,
+                    FirstName = response.FirstName,
+                    LastName = response.LastName,
+                    UserType = response.UserType,
+                    Address = response.Address,
+                });
+
+            return NotFound();
+        }
 
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginDTO model)
@@ -60,7 +78,7 @@ namespace CargoPay.Api.Controllers
                 new("FirstName", user.FirstName),
                 new("LastName", user.LastName),
                 new("PhoneNumber", user.PhoneNumber ?? string.Empty),
-                new("Email", user.Email ?? string.Empty)
+                new("Email", user.Email ?? string.Empty),
             };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["jwtKey"]!));

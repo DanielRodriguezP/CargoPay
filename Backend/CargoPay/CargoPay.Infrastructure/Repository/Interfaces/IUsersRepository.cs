@@ -24,7 +24,5 @@ namespace CargoPay.Infrastructure.Repository.Interfaces
         Task<SignInResult> LoginAsync(LoginDTO model);
         
         Task LogoutAsync();
-
-
     }
 }

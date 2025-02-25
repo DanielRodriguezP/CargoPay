@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace CargoPay.Application.Services.Interfaces
 {
-    public interface ICardService
+    public interface IPayService
     {
-        Task<ActionResponse<IEnumerable<Card>>> GetAsync(Guid id);
-        Task<ActionResponse<Card>> AddCardAsync(CardDTO cardDTO);
+        Task<ActionResponse<IEnumerable<Pay>>> GetAsync(Guid id);
+        Task<ActionResponse<Pay>> AddPaydAsync(PayDTO payDTO);
     }
 }

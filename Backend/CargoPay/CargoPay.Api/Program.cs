@@ -75,6 +75,9 @@ builder.Services.AddScoped(typeof(ICardRepository), typeof(CardRepository));
 builder.Services.AddScoped<IUsersRepository, UsersRepository>();
 builder.Services.AddScoped<IUsersService, UsersService>();
 
+builder.Services.AddScoped<IPayRepository, PayRepository>();
+builder.Services.AddScoped<IPayService, PayService>();
+
 builder.Services.AddTransient<SeedDb>();
 
 

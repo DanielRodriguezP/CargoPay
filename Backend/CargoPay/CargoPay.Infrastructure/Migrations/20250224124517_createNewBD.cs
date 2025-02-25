@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CargoPay.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class NewEntities : Migration
+    public partial class createNewBD : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -165,10 +165,11 @@ namespace CargoPay.Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Number = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    Number = table.Column<string>(type: "nvarchar(15)", maxLength: 15, nullable: false),
                     CVV = table.Column<int>(type: "int", nullable: false),
                     Balance = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     CardType = table.Column<int>(type: "int", nullable: false),
+                    ExpiryDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
@@ -245,6 +246,13 @@ namespace CargoPay.Infrastructure.Migrations
                 column: "NormalizedEmail");
 
             migrationBuilder.CreateIndex(
+                name: "IX_AspNetUsers_Email",
+                table: "AspNetUsers",
+                column: "Email",
+                unique: true,
+                filter: "[Email] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -255,8 +263,7 @@ namespace CargoPay.Infrastructure.Migrations
                 name: "IX_Cards_Number",
                 table: "Cards",
                 column: "Number",
-                unique: true,
-                filter: "[Number] IS NOT NULL");
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Cards_UserId",
